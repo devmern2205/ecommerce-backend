@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const authRouter = require('./authentication')
+const categoryRouter = require('./category')
 
-const authApiRoute = process.env.BASE_AUTH_URL
-router.use(authApiRoute, authRouter)
+
+router.use('/authentication', authRouter);
+router.use('/category', categoryRouter)
 
 module.exports = router;
