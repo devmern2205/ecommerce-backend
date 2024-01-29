@@ -40,6 +40,11 @@ const userSchema = new Schema({
     verified:{
         type: Boolean,
         default: false
+    },
+    role:{
+        type: String,
+        default: "member",
+        enum: [ "member", "admin", "merchant"]
     }
 })
 
