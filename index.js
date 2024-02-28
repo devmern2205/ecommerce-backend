@@ -8,6 +8,7 @@ const  route  = require('./route');
 dbConnection();
 
 app.use(route);
-
+const path = require('path')
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 app.listen(3000)

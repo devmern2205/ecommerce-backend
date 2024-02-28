@@ -39,24 +39,25 @@ function createProductController(req, res) {
 async function createvariantController(req, res) {
   const { image, color, storage, ram, price, quantity, size, product } =
     req.body;
-  console.log(req.file);
-  //   const variant = new variantSchema({
-  //     image,
-  //     color,
-  //     storage,
-  //     ram,
-  //     price,
-  //     quantity,
-  //     size,
-  //     product,
-  //   });
-  //   variant.save();
+  console.log(req.file.filename);
+    const variant = new variantSchema({
+      image: `http://localhost:3000/uploads/${req.file.filename}`,
+      color,
+      storage,
+      ram,
+      price,
+      quantity,
+      size,
+      product,
+    });
+    variant.save();
 
-  //   await productSchema.findOneAndUpdate(
-  //     { _id: variant.product },
-  //     { $push: { variants: variant._id } },
-  //     { new: true }
-  //   );
+    await productSchema.findOneAndUpdate(
+      { _id: variant.product },
+      { $push: { variants: variant._id } },
+      { new: true }
+    );
+    res.send({success: "Variant create successfully done"})
 }
 
 module.exports = {

@@ -17,16 +17,17 @@ const variantSchema = new Schema({
   },
   price: {
     type: String,
-    required: true,
+    // required: true,
   },
   quantity: {
     type: String,
-    required: true,
+    // required: true,
   },
   size: String,
   product: {
     type: Schema.Types.ObjectId,
     ref: "Product",
+    required: true
   },
   created: {
     type: Date,
