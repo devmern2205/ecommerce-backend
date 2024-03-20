@@ -70,10 +70,17 @@ async function deleteProductController(req, res){
   const data = await productSchema.findByIdAndDelete(req.body.id)
   res.send(data)
 }
+
+async function getAllVariantController(req,res){
+  const data = await variantSchema.find({}).populate("product")
+  res.send(data)
+}
+
 module.exports = {
   secureProduct,
   createProductController,
   createvariantController,
   getAllProductController,
-  deleteProductController
+  deleteProductController,
+  getAllVariantController
 };
