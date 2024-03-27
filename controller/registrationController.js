@@ -25,7 +25,7 @@ async function registrationController(req,res){
     if(existingEmail){
         return res.send({error: 'Email is already in used'})
     }
-   
+    var token = jwt.sign({ email }, process.env.TOKEN_SECRET);
     bcrypt.hash(password, 10, function(err, hash) {
         const users = new UserList({
             firstname,
@@ -37,12 +37,16 @@ async function registrationController(req,res){
             postcode,
             division,
             district,
-            password:hash
+            password:hash,
+            token: email
         })
         users.save();
-        var token = jwt.sign({ email }, process.env.TOKEN_SECRET);
+        // var token = jwt.sign({ email }, process.env.TOKEN_SECRET);
         sendEmail(email, 'EMAIL VERIFICATION', emailVerficationTemplate(token))
-        res.send(users);
+        res.json({
+            success: "Registration Successfully done.please verify your email",
+            data: users
+        });
     });
     
 }
