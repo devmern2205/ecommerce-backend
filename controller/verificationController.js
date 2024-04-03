@@ -12,7 +12,7 @@ async function verificationController(req,res){
             {verified: true},
             {new: true}
            )  
-           res.json({success: "email verification done"})
+           res.redirect("http://localhost:5173/login")
     }else{
         res.json({error: "hoi nai"})
     }
